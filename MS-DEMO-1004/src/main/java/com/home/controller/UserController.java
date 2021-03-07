@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.home.bean.MySqlUser;
 
-@RequestMapping(value = "/sqlApi")
+@RequestMapping(value = "/demo1004")
 public interface UserController {
 	
 	@GetMapping(value = "/login")
