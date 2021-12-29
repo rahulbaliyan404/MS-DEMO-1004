@@ -13,13 +13,17 @@ import com.home.bean.MySqlUser;
 import com.home.controller.UserController;
 import com.home.logic.UserLogic;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 public class UserControllerImpl implements UserController {
-	
+
 	@Autowired
 	private UserLogic userLogic;
-	
+
 	private static final Logger LOGGER = LoggerFactory.getLogger(UserControllerImpl.class);
 
 	@Override
@@ -28,6 +32,10 @@ public class UserControllerImpl implements UserController {
 		return userLogic.loginUser(user);
 	}
 
+	@ApiOperation(value = "Get User", notes = "Get user details", tags = { "User Management" })
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "User data"),
+			@ApiResponse(code = 404, message = "Invalid userId"),
+			@ApiResponse(code = 500, message = "Internal server error") })
 	@Override
 	public Optional<MySqlUser> getUserById(int id) {
 		LOGGER.info("UserControllerImpl getUserById method :: START");
@@ -40,6 +48,10 @@ public class UserControllerImpl implements UserController {
 		return userLogic.getUsers();
 	}
 
+	@ApiOperation(value = "Create User", notes = "Create new user", tags = { "User Management" })
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "User Created Successfully"),
+			@ApiResponse(code = 404, message = "Invalid Data"),
+			@ApiResponse(code = 500, message = "Internal Server error") })
 	@Override
 	public String saveUser(MySqlUser user) {
 		LOGGER.info("UserControllerImpl saveUser method    :: START");
@@ -53,12 +65,12 @@ public class UserControllerImpl implements UserController {
 	}
 
 	@Override
-	public String updateUser(MySqlUser user,int id) {
-		
+	public String updateUser(MySqlUser user, int id) {
+
 		System.out.println(user.getId());
 		System.out.println(user.getName());
 		System.out.println(id);
-		
+
 		return null;
 	}
 

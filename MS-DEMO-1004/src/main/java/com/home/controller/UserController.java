@@ -13,9 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.home.bean.MySqlUser;
 
+import io.swagger.annotations.Api;
+
 @RequestMapping(value = "/demo1004")
+@Api(value = "demo1004", tags = "User Management.")
 public interface UserController {
-	
+
 	@GetMapping(value = "/login")
 	public MySqlUser loginUser(@RequestBody MySqlUser userPojo);
 
@@ -30,10 +33,8 @@ public interface UserController {
 
 	@DeleteMapping(value = "/delete/{id}")
 	public String deleteUser(@PathVariable("id") int id);
-	
+
 	@PutMapping(value = "/update/{id}")
-	public String updateUser(@RequestBody MySqlUser user,@PathVariable("id") int id);
-
-
+	public String updateUser(@RequestBody MySqlUser user, @PathVariable("id") int id);
 
 }
